@@ -94,7 +94,24 @@ public class FXMLController {
     			txtResult.appendText(c1.getNome() + "\n");
     		}
     	
+    		txtResult.appendText("\n"+ "VISITA AMPIEZZA:" + "\n");
+    		
+    		for(Country c1 : model.visitaAmpiezza(c)) {
+    			txtResult.appendText(c1.getNome() + "\n");
+    		}
     
+    		txtResult.appendText("\n"+ "CONNECTIVITY INSPECTOR:" + "\n");
+    		
+    		ConnectivityInspector<Country,DefaultEdge> ispezione = new ConnectivityInspector<>(model.getGrafo());
+    		
+    			
+    			
+    		for(Country c1 : ispezione.connectedSetOf(c)) {
+    			
+    			txtResult.appendText(c1.getNome() + "\n");
+    		}
+    		
+
     	
     }
 
