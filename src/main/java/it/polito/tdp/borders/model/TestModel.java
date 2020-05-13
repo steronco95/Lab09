@@ -8,6 +8,19 @@ public class TestModel {
 
 		System.out.println("TestModel -- TODO");
 		
+		model.creaGrafo(2000);
+		
+		System.out.println(model.vertici());
+		System.out.println(model.archi());
+		
+		System.out.println("\n\\\\\\\\\\\\\\\\\\\\\\\\n");
+		
+		model.creaGrafo(1918);
+		
+		System.out.println(model.vertici());
+		System.out.println(model.archi());
+		
+		
 //		System.out.println("Creo il grafo relativo al 2000");
 //		model.createGraph(2000);
 		
