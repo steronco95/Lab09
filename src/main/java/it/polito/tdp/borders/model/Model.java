@@ -16,6 +16,7 @@ import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleGraph;
 import org.jgrapht.traverse.BreadthFirstIterator;
+import org.jgrapht.traverse.DepthFirstIterator;
 
 import it.polito.tdp.borders.db.BordersDAO;
 import it.polito.tdp.metroparis.model.Fermata;
@@ -141,63 +142,16 @@ public class Model {
 //		
 //		return visita;
 //	}
-	public Map<Country,Country> alberoVisita(Country source) {
+	public List<Country> alberoVisita(Country source) {
+
+		List<Country> result = new ArrayList<>();
 		
-		Map<Country,Country> result = new HashMap<>();
-		result.put(source, null);
+		DepthFirstIterator<Country,DefaultEdge> dfi = new DepthFirstIterator<>(grafo,source);
 		
-		// <verticeNuovo - verticePrecedente>
-		
-		BreadthFirstIterator<Country,DefaultEdge> bfv = new BreadthFirstIterator<>(grafo,source);
-		
-		bfv.addTraversalListener(new TraversalListener<Country, DefaultEdge>(){
-
-			@Override
-			public void connectedComponentFinished(ConnectedComponentTraversalEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void connectedComponentStarted(ConnectedComponentTraversalEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void edgeTraversed(EdgeTraversalEvent<DefaultEdge> e) {
-				
-				DefaultEdge g = e.getEdge();
-				Country a = grafo.getEdgeSource(g);
-				Country b = grafo.getEdgeTarget(g);
-				
-				if(result.containsKey(a)) {
-					result.put(b, a);
-				}else {
-					result.put(a, b);
-				}
-				
-			}
-
-			@Override
-			public void vertexTraversed(VertexTraversalEvent<Country> e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void vertexFinished(VertexTraversalEvent<Country> e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			
-			
-		});
-		
-		while(bfv.hasNext()) {
-			bfv.next();
+		while(dfi.hasNext()) {
+			result.add(dfi.next());
 		}
+
 		
 		return result;
 	}

@@ -88,10 +88,10 @@ public class FXMLController {
     	Country c = cbxStati.getValue();
     	
     	
-    		Map<Country,Country> result = model.alberoVisita(c);
+//    		Map<Country,Country> result = model.alberoVisita(c);
     		
-    		for(Country c1 : result.keySet() ) {
-    			txtResult.appendText(c.toString() + "\n");
+    		for(Country c1 : model.alberoVisita(c) ) {
+    			txtResult.appendText(c1.getNome() + "\n");
     		}
     	
     
