@@ -53,6 +53,12 @@ public class FXMLController {
        	
     	try {
     		anno = Integer.parseInt(txtAnno.getText());
+    		
+    		if(anno < 1816 || anno > 2016) {
+    			txtResult.appendText("inserire un anno nell'intervallo 1816-2016");
+    			return;
+    		}
+    		
     		Graph<Country,DefaultEdge> grafo =  model.creaGrafo(anno);
     		
     		cbxStati.getItems().addAll(grafo.vertexSet());
@@ -84,11 +90,13 @@ public class FXMLController {
     void doVisita(ActionEvent event) {
 
     	txtResult.clear();
-    
+    	
     	Country c = cbxStati.getValue();
     	
-    	
-//    		Map<Country,Country> result = model.alberoVisita(c);
+    	if(c == null) {
+    		txtResult.appendText("selezionare uno stato!");
+    		return;
+    	}
     		
     		for(Country c1 : model.alberoVisita(c) ) {
     			txtResult.appendText(c1.getNome() + "\n");
@@ -110,6 +118,13 @@ public class FXMLController {
     			
     			txtResult.appendText(c1.getNome() + "\n");
     		}
+    	
+    	
+    	
+    	
+//    		Map<Country,Country> result = model.alberoVisita(c);
+    		
+    		
     		
 
     	
